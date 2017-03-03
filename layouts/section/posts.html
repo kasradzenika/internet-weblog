@@ -12,11 +12,14 @@
               <li>
                 {{ if (not (isset .Params "externalurl")) }}
                   <a rel="full-article" href="{{ .Permalink }}">{{ .Title }}</a>
-                  on <time datetime="{{ .Date }}" pubdate="">{{ .Date.Format "January 2" }}</time>
+                  <time datetime="{{ .Date }}" pubdate="">
+                  {{ .Date.Format "2" }} {{ (index .Site.Data.months.ka .Date.Month) }}
+                  </time>
                 {{ else }}
                   <a rel="remote-article" href="{{ .Params.externalurl }}">{{ .Title }} →</a>
-                  on
-                  <a href="{{ .Permalink }}"><time datetime="{{ .Date }}" pubdate="">{{ .Date.Format "January 2" }}</time></a>
+                  <a href="{{ .Permalink }}"><time datetime="{{ .Date }}" pubdate="">
+                      {{ .Date.Format "2" }} {{ (index .Site.Data.months.ka .Date.Month) }}
+                  </time></a>
                 {{ end }}
               </li>
             {{ end }}

@@ -5,7 +5,10 @@
     <h2><a rel="remote-article" href="{{ .Params.externalurl }}">→ {{ .Title }}</a> <a href="{{ .Permalink }}">∞</a></h2>
   {{ end }}
 
-  <div class="postmeta">Posted on <time datetime="{{ .Date }}" pubdate="">{{ .Date.Format "January 2, 2006" }}</time>
+  <div class="postmeta"><time datetime="{{ .Date }}" pubdate="">
+      {{ .Date.Format "2" }} {{ (index .Site.Data.months.ka .Date.Month) }}, {{ .Date.Format "2006" }}
+      </time>
+      
     {{ if (isset .Params "categories") }}
        in
       <span class="categories">
@@ -29,4 +32,5 @@
       <a class="continue" rel="full-article" href="{{ .Permalink }}">Continue Reading »</a>
     {{ end }}
   {{ end }}
+                                
 </article>

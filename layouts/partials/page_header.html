@@ -1,19 +1,29 @@
+
 <header>
-  <nav>
-    <h1><a href="/">@{{ .Site.Author.handle }}</a>’s {{ .Site.Title }}.</h1>
-    <div class="menu">
-      {{ $.Scratch.Add "sections" .Site.Params.rsssections }}
-      <ul>
-        {{ range .Site.Menus.main }}
+    <div class="top_line">
+    </div>
+    <nav>
+        {{ $baseURL := .Site.BaseURL }}
+        {{ $aboutURL := .Site.Author.aboutpage }}
+        <div class="menu">
+          {{ $.Scratch.Add "sections" .Site.Params.rsssections }}
+          <ul>
+            <li><a class="main_menu_link" href="{{ $baseURL }}">მთავარი</a></li>
+            {{ range .Site.Menus.main }}
             <li>
-              <a href="{{ .URL }}">{{ .Name }}</a>
+              <a class="main_menu_link" href="{{ .URL }}">{{ .Name }}</a>
               {{ if in ($.Scratch.Get "sections") .Name }}
-                <a href="{{ .URL }}index.xml"><img src="/img/rss.svg" class="rss-icon" /></a>
+                <a href="{{ .URL }}index.xml"><img src="{{ $baseURL }}img/rss.svg" class="rss-icon" /></a>
               {{ end }}
             </li>
-        {{ end }}
-        {{ with .Site.Author.aboutpage }}<li><a href="{{ . }}">About</a></li>{{ end }}
-      </ul>
-    </div>
-  </nav>
+            <li class="about"><a class="main_menu_link" href="{{ $aboutURL }}">შესახებ</a></li>
+            <li class="about"><a class="main_menu_link" href="{{ .URL }}index.xml"><img src="{{ $baseURL }}img/rss.svg" class="rss-icon" /></a></li>
+            {{ end }}
+          </ul>
+        </div>
+        <br/>
+        <br/>
+        <h1>{{ .Site.Author.handle }}</h1>
+        <h5>[{{ .Site.Params.Description }}]</h5>
+    </nav>
 </header>
